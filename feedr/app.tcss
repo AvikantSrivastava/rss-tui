@@ -1,0 +1,15 @@
+#feeds {
+    width: 20%;
+}
+
+#items {
+    width: 40%;
+}
+
+#content {
+    width: 40%;
+}
+
+Horizontal {
+    height: 100%;
+}

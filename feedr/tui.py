@@ -7,6 +7,7 @@ from .utils import check_config_file
 
 
 class RSSApp(App):
+    CSS_PATH = "./app.tcss"
     SCREENS = {
         "main": MainScreen,
         "setup": SetupScreen,
