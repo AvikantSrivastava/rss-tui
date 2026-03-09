@@ -1,41 +1,82 @@
+from textual import on
 from textual.app import ComposeResult
 from textual.containers import Horizontal, Vertical
-from textual.screen import Screen
-from textual.widgets import Button, Footer, Header, Label, OptionList, Static
+from textual.widgets import OptionList, Static
 from textual.widgets.option_list import Option
+
+from feedr.dummy_data import DUMMY_FEED
 
 from .base_screen import BaseScreen
 
 
 class MainScreen(BaseScreen):
     BINDINGS = [
-        ("left", "focus_left", "Move Left"),
-        ("right", "focus_right", "Move Right"),
+        ("right", "focus_articles", "Articles"),
+        ("left", "focus_feeds", "Feeds"),
     ]
 
     def compose_body(self) -> ComposeResult:
-
         with Horizontal():
-            yield Label("Welcome to RSS TUI!")
-            # Index Column
+            # FEEDS COLUMN
             with Vertical(id="feeds"):
                 yield Static("Feeds")
                 yield OptionList(
-                    *[Option(f"Feed {i}") for i in range(1, 6)], id="feeds_list"
-                )
-            # Rows Column
-            with Vertical(id="items"):
-                yield Static("Items")
-                yield OptionList(
-                    *[Option(f"Article {i}") for i in range(1, 101)],
-                    id="items_list",
+                    *[Option(feed, id=feed) for feed in DUMMY_FEED.keys()],
+                    id="feeds_list",
                 )
 
-            # Preview Column
+            # ARTICLES COLUMN
+            with Vertical(id="items"):
+                yield Static("Articles")
+                yield OptionList(id="items_list")
+
+            # CONTENT COLUMN
             with Vertical(id="content"):
                 yield Static("Content")
-                yield Static("Select an article to read...", id="content_view")
+                yield Static("Select an article...", id="content_view")
 
-    def on_button_pressed(self, event: Button.Pressed) -> None:
-        if event.button.id == "quit-app":
-            self.app.exit(message="Config not created.")
+    def on_mount(self):
+        self.feeds = self.query_one("#feeds_list", OptionList)
+        self.articles = self.query_one("#items_list", OptionList)
+        self.content = self.query_one("#content_view", Static)
+
+        self.feeds.focus()
+
+    # → move to articles
+    def action_focus_articles(self):
+        if self.feeds.has_focus:
+            self.articles.focus()
+
+    # ← move back to feeds
+    def action_focus_feeds(self):
+        if self.articles.has_focus:
+            self.feeds.focus()
+
+    # FEED HIGHLIGHTED
+    @on(OptionList.OptionHighlighted, "#feeds_list")
+    def feed_changed(self, event: OptionList.OptionHighlighted):
+
+        feed_name = event.option.id
+        articles = DUMMY_FEED.get(feed_name, {})
+
+        self.articles.clear_options()
+
+        for i, (article_id, article) in enumerate(articles.items()):
+            if i >= 100:
+                break
+
+            self.articles.add_option(Option(article["title"], id=article_id))
+
+    # ARTICLE HIGHLIGHTED
+    @on(OptionList.OptionHighlighted, "#items_list")
+    def article_changed(self, event: OptionList.OptionHighlighted):
+
+        feed_option = self.feeds.get_option_at_index(self.feeds.highlighted)
+        feed_name = feed_option.id
+
+        article_id = event.option.id
+        article = DUMMY_FEED[feed_name][article_id]
+
+        self.content.update(
+            f"[b]{article['title']}[/b]\n\n{article['description']}\n\n{article['content']}"
+        )
