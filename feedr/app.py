@@ -1,6 +1,7 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Footer, Header
 
+from feedr.screens.loading import LoadingScreen
 from feedr.screens.main import MainScreen
 from feedr.screens.setup import SetupScreen
 from feedr.utils import check_config_file
@@ -37,3 +38,6 @@ class RSSApp(App):
         self.theme = (
             "textual-dark" if self.theme == "textual-light" else "textual-light"
         )
+
+    async def action_refresh(self):
+        await self.push_screen(LoadingScreen())
