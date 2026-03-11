@@ -1,12 +1,17 @@
 #!/usr/bin/env python
 
+import re
+from pathlib import Path
+
 from setuptools import find_packages, setup
 
-import feedr
+# Read version from __init__.py without importing
+init_file = Path(__file__).parent / "__init__.py"
+version = re.search(r'__version__\s*=\s*["\']([^"\']+)["\']', init_file.read_text()).group(1)
 
 setup(
     name="feedr",
-    version=feedr.__version__,
+    version=version,
     description="Terminal based RSS reader",
     author="Avikant Srivastava",
     author_email="contact@avikant.com",
