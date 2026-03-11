@@ -3,9 +3,8 @@ from textual.containers import Center
 from textual.widgets import Label, OptionList
 from textual.widgets.option_list import Option
 
+from feedr.screens.base_screen import BaseScreen
 from feedr.utils import create_config_file
-
-from .base_screen import BaseScreen
 
 
 class SetupScreen(BaseScreen):

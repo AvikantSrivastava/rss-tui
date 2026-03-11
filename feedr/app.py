@@ -1,9 +1,9 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Footer, Header
 
-from .screens.main import MainScreen
-from .screens.setup import SetupScreen
-from .utils import check_config_file
+from feedr.screens.main import MainScreen
+from feedr.screens.setup import SetupScreen
+from feedr.utils import check_config_file
 
 
 class RSSApp(App):

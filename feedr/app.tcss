@@ -13,3 +13,17 @@
 Horizontal {
     height: 100%;
 }
+
+.feed_box {
+    height: 10fr;
+    content-align: center middle;
+    border: tall $background;
+}
+.article_box {
+    height: 1fr;
+    border: tall $background;
+}
+
+.preview_box {
+    height: 1fr;
+}

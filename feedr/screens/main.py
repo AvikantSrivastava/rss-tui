@@ -5,8 +5,7 @@ from textual.widgets import OptionList, Static
 from textual.widgets.option_list import Option
 
 from feedr.dummy_data import DUMMY_FEED
-
-from .base_screen import BaseScreen
+from feedr.screens.base_screen import BaseScreen
 
 
 class MainScreen(BaseScreen):
@@ -23,17 +22,20 @@ class MainScreen(BaseScreen):
                 yield OptionList(
                     *[Option(feed, id=feed) for feed in DUMMY_FEED.keys()],
                     id="feeds_list",
+                    classes="feed_box",
                 )
 
             # ARTICLES COLUMN
             with Vertical(id="items"):
                 yield Static("Articles")
-                yield OptionList(id="items_list")
+                yield OptionList(id="items_list", classes="article_box")
 
             # CONTENT COLUMN
             with Vertical(id="content"):
                 yield Static("Content")
-                yield Static("Select an article...", id="content_view")
+                yield Static(
+                    "Select an article...", id="content_view", classes="preview_box"
+                )
 
     def on_mount(self):
         self.feeds = self.query_one("#feeds_list", OptionList)
