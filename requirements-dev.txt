@@ -1,0 +1,4 @@
+-r requirements.txt
+
+textual-dev==1.8.0
+textual-serve==1.1.3
