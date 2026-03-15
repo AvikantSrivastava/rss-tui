@@ -1,4 +1,4 @@
-from feedr.refresh import refresh_feeds
+from feedr.services.refresh import refresh_feeds
 from feedr.screens.base_screen import BaseScreen
 from textual.app import ComposeResult
 from textual.containers import Center
