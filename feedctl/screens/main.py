@@ -1,11 +1,10 @@
+from feedctl.screens.base_screen import BaseScreen
+from feedctl.services.data import get_feed_data, mark_article_read
 from textual import on
 from textual.app import ComposeResult
 from textual.containers import Horizontal, Vertical
 from textual.widgets import OptionList, Static
 from textual.widgets.option_list import Option
-
-from feedr.screens.base_screen import BaseScreen
-from feedr.services.data import get_feed_data, mark_article_read
 
 
 def _option_label(title: str, read: bool) -> str:
@@ -104,9 +103,7 @@ class MainScreen(BaseScreen):
         article_id = event.option.id
         article = self.data[feed_name][article_id]
 
-        self.content.update(
-            f"[b]{article['title']}[/b]\n\n{article['description']}"
-        )
+        self.content.update(f"[b]{article['title']}[/b]\n\n{article['description']}")
 
     def action_mark_read(self):
         """Mark the currently highlighted article as read."""

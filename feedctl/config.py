@@ -2,7 +2,7 @@ import logging
 import os
 import tomllib
 
-from feedr.constants import CONFIG_PATH
+from feedctl.constants import CONFIG_PATH
 
 
 class Config:

@@ -1,5 +1,6 @@
 def main():
-    from feedr.app import RSSApp
+    from feedctl.app import RSSApp
+
     RSSApp().run()
 
 

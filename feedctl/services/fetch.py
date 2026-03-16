@@ -3,7 +3,7 @@ import calendar
 from datetime import datetime, timezone
 
 import feedparser
-from feedr.db.session import add_articles_to_db
+from feedctl.db.session import add_articles_to_db
 
 
 def fetch(feed: dict):

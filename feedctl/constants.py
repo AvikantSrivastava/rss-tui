@@ -1,7 +1,7 @@
 import os
 import platform
 
-APP_NAME = "feedr"
+APP_NAME = "feedctl"
 
 system = platform.system()
 if system == "Linux":
@@ -28,4 +28,4 @@ url = "https://news.ycombinator.com/rss"
 name = "Reddit Programming"
 url = "https://www.reddit.com/r/programming/.rss"
 """
-DB_PATH = os.path.join(CONFIG_DIR, "feedr.db")
+DB_PATH = os.path.join(CONFIG_DIR, "feedctl.db")

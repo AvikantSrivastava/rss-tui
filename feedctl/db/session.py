@@ -1,8 +1,7 @@
+from feedctl.constants import DB_PATH
+from feedctl.db.models import Article, Base, Feed
 from sqlalchemy import and_, create_engine
 from sqlalchemy.orm import sessionmaker
-
-from feedr.constants import DB_PATH
-from feedr.db.models import Article, Base, Feed
 
 engine = create_engine(f"sqlite:///{DB_PATH}")
 Base.metadata.create_all(engine)
