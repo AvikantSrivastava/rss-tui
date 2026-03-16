@@ -3,9 +3,9 @@ from feedr.db.models import Feed, Article
 
 
 def get_feed_data():
-    
+
     data = {}
-    
+
     with session() as db:
         feeds = db.query(Feed).all()
 

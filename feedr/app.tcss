@@ -27,3 +27,8 @@ Horizontal {
 .preview_box {
     height: 1fr;
 }
+
+LoadingScreen Center {
+    height: 1fr;
+    align: center middle;
+}

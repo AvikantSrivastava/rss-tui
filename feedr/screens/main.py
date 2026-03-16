@@ -88,6 +88,8 @@ class MainScreen(BaseScreen):
     @on(OptionList.OptionHighlighted, "#items_list")
     def article_changed(self, event: OptionList.OptionHighlighted):
 
+        if self.feeds.highlighted is None:
+            return
         feed_option = self.feeds.get_option_at_index(self.feeds.highlighted)
         feed_name = feed_option.id
 
@@ -95,5 +97,5 @@ class MainScreen(BaseScreen):
         article = self.data[feed_name][article_id]
 
         self.content.update(
-            f"[b]{article['title']}[/b]\n\n{article['description']}\n\n{article['content']}"
+            f"[b]{article['title']}[/b]\n\n{article['description']}"
         )
