@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "feedr"
+version = "0.1.0"
+description = "A terminal-based RSS reader"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Avikant Srivastava", email = "contact@avikant.com" }]
+requires-python = ">=3.11"
+keywords = ["rss", "tui", "terminal", "reader", "textual"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Terminals",
+]
+dependencies = [
+    "textual>=6.11.0",
+    "sqlalchemy>=2.0.48",
+    "feedparser>=6.0.11",
+    "aiohttp>=3.13.3",
+    "rich>=14.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "textual-dev>=1.8.0",
+    "textual-serve>=1.1.3",
+    "build>=1.0.0",
+    "twine>=5.0.0",
+]
+
+[project.scripts]
+feedr = "feedr.cli:main"
+
+[project.urls]
+Repository = "https://github.com/avikant/rss-tui"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["feedr*"]
+
+[tool.setuptools.package-data]
+feedr = ["*.tcss"]
