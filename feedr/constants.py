@@ -14,9 +14,10 @@ else:
     base = os.path.expanduser("~")
 
 CONFIG_DIR = os.path.join(base, APP_NAME)
+os.makedirs(CONFIG_DIR, exist_ok=True)
 CONFIG_PATH = os.path.join(CONFIG_DIR, "config.toml")
-CONFIG_CONTENT = '''
-[ui]
+CONFIG_CONTENT = """
+[app]
 theme = "default"
 
 [[feeds]]
@@ -26,4 +27,5 @@ url = "https://news.ycombinator.com/rss"
 [[feeds]]
 name = "Reddit Programming"
 url = "https://www.reddit.com/r/programming/.rss"
-'''
+"""
+DB_PATH = os.path.join(CONFIG_DIR, "feedr.db")

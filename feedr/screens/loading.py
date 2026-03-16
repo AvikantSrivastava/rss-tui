@@ -1,5 +1,6 @@
-from feedr.refresh import refresh_feeds
+from feedr import config
 from feedr.screens.base_screen import BaseScreen
+from feedr.services.fetch import fetch_feeds
 from textual.app import ComposeResult
 from textual.containers import Center
 from textual.widgets import LoadingIndicator, Static
@@ -15,5 +16,5 @@ class LoadingScreen(BaseScreen):
         self.run_worker(self._do_refresh())
 
     async def _do_refresh(self) -> None:
-        await refresh_feeds()
+        await fetch_feeds(config.feeds)
         self.dismiss()

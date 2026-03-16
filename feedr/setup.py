@@ -20,6 +20,7 @@ setup(
     python_requires=">=3.11",
     install_requires=[
         "textual>=6.11.0",
+	"sqlalchemy>=2.0.48",
         "aiohttp>=3.13.3",
         "click>=8.3.1",
         "rich>=14.2.0",
