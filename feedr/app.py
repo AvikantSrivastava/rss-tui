@@ -28,7 +28,7 @@ class RSSApp(App):
         yield Footer()
 
     def on_mount(self):
-
+        self.theme = "monokai"
         if check_config_file():
             self.push_screen("main")
         else:
