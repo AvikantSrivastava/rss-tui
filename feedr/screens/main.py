@@ -4,15 +4,22 @@ from textual.containers import Horizontal, Vertical
 from textual.widgets import OptionList, Static
 from textual.widgets.option_list import Option
 
-from feedr.dummy_data import DUMMY_FEED
 from feedr.screens.base_screen import BaseScreen
-from feedr.services.data import get_feed_data
+from feedr.services.data import get_feed_data, mark_article_read
+
+
+def _option_label(title: str, read: bool) -> str:
+    """Format an article option label with read/unread indicator."""
+    if read:
+        return f"[dim]  {title}[/dim]"
+    return f"[bold green]●[/bold green] {title}"
 
 
 class MainScreen(BaseScreen):
     BINDINGS = [
         ("right", "focus_articles", "Articles"),
         ("left", "focus_feeds", "Feeds"),
+        ("space", "mark_read", "Mark read"),
     ]
 
     def __init__(self, *args, **kwargs):
@@ -82,7 +89,8 @@ class MainScreen(BaseScreen):
             if i >= 100:
                 break
 
-            self.articles.add_option(Option(article["title"], id=article_id))
+            label = _option_label(article["title"], article["read"])
+            self.articles.add_option(Option(label, id=article_id))
 
     # ARTICLE HIGHLIGHTED
     @on(OptionList.OptionHighlighted, "#items_list")
@@ -98,4 +106,35 @@ class MainScreen(BaseScreen):
 
         self.content.update(
             f"[b]{article['title']}[/b]\n\n{article['description']}"
+        )
+
+    def action_mark_read(self):
+        """Mark the currently highlighted article as read."""
+        if not self.articles.has_focus:
+            return
+        if self.articles.highlighted is None:
+            return
+        if self.feeds.highlighted is None:
+            return
+
+        feed_option = self.feeds.get_option_at_index(self.feeds.highlighted)
+        feed_name = feed_option.id
+
+        article_option = self.articles.get_option_at_index(self.articles.highlighted)
+        article_id = article_option.id
+        article = self.data[feed_name].get(article_id)
+
+        if article is None or article["read"]:
+            return
+
+        # Update DB
+        mark_article_read(article["id"])
+
+        # Update local cache
+        article["read"] = True
+
+        # Update the option label in-place
+        new_label = _option_label(article["title"], True)
+        self.articles.replace_option_prompt_at_index(
+            self.articles.highlighted, new_label
         )
