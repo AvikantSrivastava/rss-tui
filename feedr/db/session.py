@@ -1,5 +1,3 @@
-from email.utils import parsedate_to_datetime
-
 from sqlalchemy import and_, create_engine
 from sqlalchemy.orm import sessionmaker
 
