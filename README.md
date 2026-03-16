@@ -26,12 +26,17 @@ feedr
 
 On first run, feedr will ask you to set up your config file at `~/.config/feedr/config.ini`:
 
-```ini
+```toml
 [app]
-name = feedr
+theme = "default"
 
-[feeds]
-Hacker News = https://news.ycombinator.com/rss
+[[feeds]]
+name = "Hacker News"
+url = "https://news.ycombinator.com/rss"
+
+[[feeds]]
+name = "Reddit Programming"
+url = "https://www.reddit.com/r/programming/.rss"
 ```
 
 ## Keybindings
