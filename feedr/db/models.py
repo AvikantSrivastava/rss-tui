@@ -1,4 +1,4 @@
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -21,6 +21,7 @@ class Article(Base):
     description = Column(String, nullable=False)
     url = Column(String, nullable=False)
     feed_id = Column(Integer, ForeignKey("feeds.id"), nullable=False)
+    read = Column(Boolean, default=False)
 
 
 class SchemaVersion(Base):
