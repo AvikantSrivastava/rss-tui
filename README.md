@@ -1,4 +1,4 @@
-# feedr
+# feedctl
 
 A terminal-based RSS reader built with [Textual](https://textual.textualize.io/).
 
@@ -13,18 +13,18 @@ A terminal-based RSS reader built with [Textual](https://textual.textualize.io/)
 ## Installation
 
 ```bash
-pip install feedr
+pip install feedctl
 ```
 
 ## Usage
 
 ```bash
-feedr
+feedctl
 ```
 
 ## Configuration
 
-On first run, feedr will ask you to set up your config file at `~/.config/feedr/config.ini`:
+On first run, feedctl will ask you to set up your config file at `~/.config/feedctl/config.ini`:
 
 ```toml
 [app]

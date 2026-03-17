@@ -1,6 +1,6 @@
-from feedr import config
-from feedr.screens.base_screen import BaseScreen
-from feedr.services.fetch import fetch_feeds
+from feedctl import config
+from feedctl.screens.base_screen import BaseScreen
+from feedctl.services.fetch import fetch_feeds
 from textual.app import ComposeResult
 from textual.containers import Center
 from textual.widgets import LoadingIndicator, Static

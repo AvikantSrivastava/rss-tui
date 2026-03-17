@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "feedr"
+name = "feedctl"
 version = "0.1.0"
 description = "A terminal-based RSS reader"
 readme = "README.md"
@@ -38,14 +38,14 @@ dev = [
 ]
 
 [project.scripts]
-feedr = "feedr.cli:main"
+feedctl = "feedctl.cli:main"
 
 [project.urls]
 Repository = "https://github.com/avikant/rss-tui"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["feedr*"]
+include = ["feedctl*"]
 
 [tool.setuptools.package-data]
-feedr = ["*.tcss"]
+feedctl = ["*.tcss"]

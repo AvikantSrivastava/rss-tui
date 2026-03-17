@@ -1,5 +1,5 @@
-from feedr import config
-from feedr.services.fetch import fetch_feeds
+from feedctl import config
+from feedctl.services.fetch import fetch_feeds
 
 
 async def refresh_feeds() -> None:

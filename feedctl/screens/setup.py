@@ -1,10 +1,9 @@
+from feedctl.screens.base_screen import BaseScreen
+from feedctl.utils import create_config_file
 from textual.app import ComposeResult
 from textual.containers import Center
 from textual.widgets import Label, OptionList
 from textual.widgets.option_list import Option
-
-from feedr.screens.base_screen import BaseScreen
-from feedr.utils import create_config_file
 
 
 class SetupScreen(BaseScreen):

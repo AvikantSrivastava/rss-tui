@@ -1,5 +1,5 @@
-from feedr.db.models import Article, Feed
-from feedr.db.session import session
+from feedctl.db.models import Article, Feed
+from feedctl.db.session import session
 
 
 def get_feed_data():

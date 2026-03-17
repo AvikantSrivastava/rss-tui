@@ -1,7 +1,7 @@
 from importlib.metadata import PackageNotFoundError, version
 
 try:
-    __version__ = version("feedr")
+    __version__ = version("feedctl")
 except PackageNotFoundError:
     __version__ = "unknown"
 
