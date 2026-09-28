@@ -33,8 +33,6 @@ def _migrate() -> None:
                 "ALTER TABLE feeds ADD COLUMN active BOOLEAN NOT NULL DEFAULT 1"
             )
 
-    # Deduplicate feeds that share a URL, keeping the lowest id as canonical and
-    # repointing the duplicates' articles onto it.
     with session() as db:
         groups: dict[str, list[Feed]] = defaultdict(list)
         for feed in db.query(Feed).order_by(Feed.id).all():
