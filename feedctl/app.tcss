@@ -32,3 +32,34 @@ LoadingScreen Center {
     height: 1fr;
     align: center middle;
 }
+
+CleanupScreen {
+    align: center middle;
+    background: $background 60%;
+}
+
+CleanupScreen Center {
+    height: 100%;
+    align: center middle;
+}
+
+#cleanup_dialog {
+    width: 60;
+    height: auto;
+    padding: 1 2;
+    border: thick $primary;
+    background: $surface;
+}
+
+#cleanup_dialog Static {
+    margin-bottom: 1;
+}
+
+#cleanup_buttons {
+    height: auto;
+    align: center middle;
+}
+
+#cleanup_buttons Button {
+    margin: 0 1;
+}

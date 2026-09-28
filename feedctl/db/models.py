@@ -8,8 +8,9 @@ class Feed(Base):
     __tablename__ = "feeds"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False, unique=True)
-    url = Column(String, nullable=False)
+    name = Column(String, nullable=False)
+    url = Column(String, nullable=False, unique=True)
+    active = Column(Boolean, nullable=False, default=True)
 
 
 class Article(Base):

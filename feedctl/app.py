@@ -1,6 +1,9 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Footer, Header
 
+from feedctl import config
+from feedctl.db.session import reconcile_feeds
+from feedctl.screens.cleanup import CleanupScreen
 from feedctl.screens.loading import LoadingScreen
 from feedctl.screens.main import MainScreen
 from feedctl.screens.setup import SetupScreen
@@ -18,6 +21,7 @@ class RSSApp(App):
         ("d", "toggle_dark", "Toggle dark mode"),
         ("q", "quit", "Quit"),
         ("r", "refresh", "Refresh"),
+        ("c", "cleanup", "Clean up DB"),
     ]
 
     def compose(self) -> ComposeResult:
@@ -30,6 +34,8 @@ class RSSApp(App):
     def on_mount(self):
         self.theme = "monokai"
         if check_config_file():
+            config.reload()
+            reconcile_feeds(config.feeds)
             self.push_screen("main")
         else:
             self.push_screen("setup")
@@ -41,3 +47,6 @@ class RSSApp(App):
 
     async def action_refresh(self):
         await self.push_screen(LoadingScreen())
+
+    def action_cleanup(self):
+        self.push_screen(CleanupScreen())
