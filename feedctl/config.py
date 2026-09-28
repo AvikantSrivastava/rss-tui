@@ -8,6 +8,16 @@ from feedctl.constants import CONFIG_PATH
 class Config:
     def __init__(self, path=CONFIG_PATH) -> None:
         self.path = path
+        self.app = {}
+        self.feeds = []
+        self.reload()
+
+    def reload(self) -> None:
+        """Re-read the config file from disk.
+
+        Called on startup and again on every refresh so edits to config.toml
+        (adding, removing, or renaming feeds) take effect without restarting.
+        """
         try:
             with open(self.path, "rb") as f:
                 data = tomllib.load(f)

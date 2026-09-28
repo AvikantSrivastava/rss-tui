@@ -7,7 +7,7 @@ def get_feed_data():
     data = {}
 
     with session() as db:
-        feeds = db.query(Feed).all()
+        feeds = db.query(Feed).filter_by(active=True).all()
 
         for feed in feeds:
             articles = (
