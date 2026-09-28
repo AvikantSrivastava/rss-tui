@@ -1,4 +1,5 @@
 from feedctl import config
+from feedctl.db.session import reconcile_feeds
 from feedctl.screens.base_screen import BaseScreen
 from feedctl.services.fetch import fetch_feeds
 from textual.app import ComposeResult
@@ -16,5 +17,7 @@ class LoadingScreen(BaseScreen):
         self.run_worker(self._do_refresh())
 
     async def _do_refresh(self) -> None:
+        config.reload()
+        reconcile_feeds(config.feeds)
         await fetch_feeds(config.feeds)
         self.dismiss()
