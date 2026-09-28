@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "feedctl"
-version = "0.1.1"
+version = "0.1.2"
 description = "A terminal-based RSS reader"
 readme = "README.md"
 license = "MIT"
